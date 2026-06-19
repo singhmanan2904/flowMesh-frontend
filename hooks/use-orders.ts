@@ -26,7 +26,7 @@ export function useOrders(orderId?: string) {
         }
 
         const data = await response.json();
-        setOrders(data.orders ?? []);
+        setOrders(data.orders?.reverse() ?? []);
       } catch {
         setError("Failed to load your orders. Please try again later.");
       } finally {

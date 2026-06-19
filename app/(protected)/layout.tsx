@@ -1,3 +1,4 @@
+import { ProtectedHeader } from "@/components/protected-header";
 import { TOKEN_KEY } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -11,5 +12,11 @@ export default async function ProtectedLayout({
   if (!token) {
     redirect("/login");
   }
-  return children;
+
+  return (
+    <div className="flex min-h-full flex-col">
+      <ProtectedHeader />
+      {children}
+    </div>
+  );
 }

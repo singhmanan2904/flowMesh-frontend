@@ -6,3 +6,4 @@ export function apiUrl(path: string) {
 
 export const AUTH_LOGIN_URL = "/api/auth/login";
 export const AUTH_REGISTER_URL = "/api/auth/register";
+export const AUTH_LOGOUT_URL = "/api/auth/logout";
