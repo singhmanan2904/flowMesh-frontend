@@ -24,6 +24,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCart } from "@/hooks/use-cart";
+import { apiUrl } from "@/lib/api";
 import { formatPrice, formatProductName, type Product } from "@/lib/product";
 
 function CheckoutCartSkeleton() {
@@ -72,17 +73,14 @@ export function CheckoutCart() {
     setError(null);
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/orders`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({
-            products: cart.map((product: Product) => product.id),
-          }),
-        }
-      );
+      const response = await fetch(apiUrl("orders"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          products: cart.map((product: Product) => product.id),
+        }),
+      });
 
       const data = await response.json();
 

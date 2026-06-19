@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCart } from "@/hooks/use-cart";
+import { apiUrl } from "@/lib/api";
 import {
   formatPrice,
   formatProductName,
@@ -62,13 +63,10 @@ export default function Home() {
       setError(null);
 
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/products`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
+        const response = await fetch(apiUrl("products"), {
+          method: "GET",
+          credentials: "include",
+        });
 
         if (!response.ok) {
           setError("Failed to load products. Please try again later.");

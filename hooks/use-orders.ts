@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { apiUrl } from "@/lib/api";
 import type { Order } from "@/lib/order";
 
 export function useOrders(orderId?: string) {
@@ -14,13 +15,10 @@ export function useOrders(orderId?: string) {
       setError(null);
 
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/orders`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
+        const response = await fetch(apiUrl("orders"), {
+          method: "GET",
+          credentials: "include",
+        });
 
         if (!response.ok) {
           setError("Failed to load your orders. Please try again later.");

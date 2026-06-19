@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { AUTH_LOGIN_URL } from "@/lib/api"
 
 type FormErrors = { 
     username?: string
@@ -57,20 +58,18 @@ function LoginForm() {
     }
     
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
-        {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json", 
-          },
-          body: JSON.stringify(data),
-          credentials: "include",
-        }
-      )
-      
+      const response = await fetch(AUTH_LOGIN_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      })
+
       if (response.ok) {
         router.push("/")
+        router.refresh()
         return
       }
 
