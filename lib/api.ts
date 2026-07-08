@@ -1,9 +1,9 @@
-const API_BASE = "/api/proxy";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "/api";
 
 export function apiUrl(path: string) {
-  return `${API_BASE}/${path.replace(/^\//, "")}`;
+  return `${API_BASE.replace(/\/$/, "")}/${path.replace(/^\//, "")}`;
 }
 
-export const AUTH_LOGIN_URL = "/api/auth/login";
-export const AUTH_REGISTER_URL = "/api/auth/register";
-export const AUTH_LOGOUT_URL = "/api/auth/logout";
+export const AUTH_LOGIN_URL = apiUrl("auth/login");
+export const AUTH_REGISTER_URL = apiUrl("auth/register");
+export const AUTH_LOGOUT_URL = apiUrl("auth/logout");
